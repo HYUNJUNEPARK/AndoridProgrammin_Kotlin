@@ -20,7 +20,7 @@
 실행 구조 분류 (1)백그라운드 서비스 (2)포어그라운드 서비스</br>
 
 **스타티드 서비스(Started Service)**</br>
--액티비티와 상관없이 독립적으로 동작하며 액티비티 종료와 무관하게 동작</br>
+-액티비티와 상관없이 독립적으로 동작하며 액티비티 종료와 무관하게 동작하므로 장시간 백그라운드 처리를 할 때 사용</br>
 -startService(Intent service) 로 호출</br>
 -stopService(Intent name) 로 서비스 종료</br>
 
@@ -39,7 +39,7 @@
 ><a id = "content2">**2. 스타티드 서비스**</a></br>
 
 ```kotlin
-//1.서비스 호출 - MainActivity
+//1.서비스 호출 startService(intent) - MainActivity
 binding.startButton.setOnClickListener {
     val intent = Intent(this, StartedService::class.java)
     intent.action = StartedService.ACTION_START
@@ -47,7 +47,7 @@ binding.startButton.setOnClickListener {
 }
 
 
-//2.서비스 동작 - StartedService
+//2.서비스 동작 onStartCommand() - StartedService
 override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
     val action = intent?.action
     Log.d("Service", "[StartedService : action] : $action")
@@ -55,7 +55,7 @@ override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
 }
 
 
-//3.서비스 종료 - MainActivity
+//3.서비스 종료 stopService(intent) - MainActivity
 binding.stopButton.setOnClickListener {
     val intent = Intent(this, StartedService::class.java)
     stopService(intent)

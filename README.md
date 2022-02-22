@@ -32,14 +32,15 @@
 
 **스레드(서비스와 비교할 개념)**</br>
 -하나의 프로세스 상의 독립적인 실행 흐름</br>
--액티비티 생명주에서 실행되며 액티비티가 종료될 때 종료됨</br>
+-액티비티 생명주기에서 실행되며 액티비티가 종료될 때 종료됨</br>
 <br></br>
 <br></br>
 
 ><a id = "content2">**2. 스타티드 서비스**</a></br>
 
 ```kotlin
-//1.서비스 호출 startService(intent) - MainActivity
+//1.서비스 호출
+//startService(intent) - MainActivity
 binding.startButton.setOnClickListener {
     val intent = Intent(this, StartedService::class.java)
     intent.action = StartedService.ACTION_START
@@ -47,7 +48,8 @@ binding.startButton.setOnClickListener {
 }
 
 
-//2.서비스 동작 onStartCommand() - StartedService
+//2.서비스 동작
+//onStartCommand() - StartedService
 override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
     val action = intent?.action
     Log.d("Service", "[StartedService : action] : $action")
@@ -55,7 +57,8 @@ override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
 }
 
 
-//3.서비스 종료 stopService(intent) - MainActivity
+//3.서비스 종료
+//stopService(intent) - MainActivity
 binding.stopButton.setOnClickListener {
     val intent = Intent(this, StartedService::class.java)
     stopService(intent)

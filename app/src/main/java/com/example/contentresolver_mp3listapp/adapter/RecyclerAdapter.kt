@@ -6,11 +6,11 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.contentresolver_mp3listapp.databinding.ItemRecyclerBinding
-import com.example.contentresolver_mp3listapp.module.Music
+import com.example.contentresolver_mp3listapp.model.Music
 import java.text.SimpleDateFormat
 
 class RecyclerAdapter : RecyclerView.Adapter<RecyclerAdapter.Holder>()  {
-    var musicList = mutableListOf<Music>() //음원 목록을 저장
+    var musicList = mutableListOf<Music>()
     var mediaPlayer: MediaPlayer? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder {
@@ -23,7 +23,7 @@ class RecyclerAdapter : RecyclerView.Adapter<RecyclerAdapter.Holder>()  {
     }
 
     override fun onBindViewHolder(holder: Holder, position: Int) {
-        val music = musicList.get(position)
+        val music = musicList[position]
         holder.setMusic(music)
     }
 

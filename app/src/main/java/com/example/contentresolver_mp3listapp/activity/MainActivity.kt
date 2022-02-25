@@ -9,8 +9,13 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.contentresolver_mp3listapp.R
 import com.example.contentresolver_mp3listapp.adapter.RecyclerAdapter
 import com.example.contentresolver_mp3listapp.databinding.ActivityMainBinding
-import com.example.contentresolver_mp3listapp.module.Music
+import com.example.contentresolver_mp3listapp.model.Music
 import com.example.contentresolver_mp3listapp.permission.Permission
+
+/*
+실행 되는지 확인 안되면 - data class Music 초기화 부분 살려보기
+data class Music -  Uri 부분 따로 빼기
+*/
 
 class MainActivity : Permission() {
     private val binding by lazy { ActivityMainBinding.inflate(layoutInflater) }
@@ -45,7 +50,7 @@ class MainActivity : Permission() {
             MediaStore.Audio.Media._ID, MediaStore.Audio.Media.TITLE, MediaStore.Audio.Media.ARTIST,
             MediaStore.Audio.Media.ALBUM_ID, MediaStore.Audio.Media.DURATION
         )
-        val cursor = contentResolver.query(urlList, musicInfoArray, null, null, null)
+        val cursor = contentResolver.query(/*데이터를 가져올 url*/urlList, /*필요한 데이터*/musicInfoArray,null, null, null)
         while (cursor?.moveToNext() == true) {
             val id = cursor.getString(0)
             val title = cursor.getString(1)
@@ -53,7 +58,6 @@ class MainActivity : Permission() {
             val albumId = cursor.getString(3)
             val duration = cursor.getLong(4)
             val music = Music(id, title, artist, albumId, duration)
-
             musicList.add(music)
         }
         return musicList

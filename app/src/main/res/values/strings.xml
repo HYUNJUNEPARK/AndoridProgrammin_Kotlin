@@ -1,3 +1,4 @@
 <resources>
-    <string name="app_name">ContentResolver_MP3ListApp</string>
+    <string name="app_name">MP3 Player</string>
+    <string name="deny_message">외부저장소 권한 승인이 필요합니다. 앱을 종료합니다.</string>
 </resources>

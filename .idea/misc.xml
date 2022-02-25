@@ -3,7 +3,9 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/parkhj/AndroidStudioProjects/ContentResolver_MP3ListApp/app/src/main/res/layout/activity_main.xml" value="0.3890625" />
+        <entry key="..\:/Users/parkhj/AndroidStudioProjects/ContentResolver_MP3ListApp/app/src/main/res/layout/activity_main.xml" value="0.4" />
+        <entry key="..\:/Users/parkhj/AndroidStudioProjects/ContentResolver_MP3ListApp/app/src/main/res/layout/item_recycler.xml" value="0.24351851851851852" />
+        <entry key="..\:/Users/parkhj/AndroidStudioProjects/ContentResolver_MP3ListApp/app/src/main/res/layout/item_recyler.xml" value="0.24351851851851852" />
       </map>
     </option>
   </component>

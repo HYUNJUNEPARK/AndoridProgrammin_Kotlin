@@ -1,6 +1,5 @@
-#ContentResolver_MP3ListApp
+# ContentResolver_MP3ListApp
 
-<img src="이미지 주소" height="400"/>
 
 ---
 1. <a href = "#content1">MediaStore</a></br>
@@ -50,9 +49,13 @@ cf. 안드로이드 4대 메이저 컴포넌트 - 액티비티, 서비스, 콘�
 ```kotlin
 private fun getMusicList(): MutableList<Music> {
     val musicList = mutableListOf<Music>()
-    val urlList: Uri = MediaStore.Audio.Media.EXTERNAL_CONTENT_URI
-    val musicInfoArray = arrayOf(MediaStore.Audio.Media._ID, MediaStore.Audio.Media.TITLE)
-    val cursor = contentResolver.query(urlList, musicInfoArray, null, null, null)
+    val url: Uri = MediaStore.Audio.Media.EXTERNAL_CONTENT_URI
+    val musicInfoArray = arrayOf(
+        MediaStore.Audio.Media._ID,
+        MediaStore.Audio.Media.TITLE
+        /*...추가로 필요한 데이터...*/
+    )
+    val cursor = contentResolver.query(url, musicInfoArray, null, null, null)
     while (cursor?.moveToNext() == true) {
         val id = cursor.getString(0)
         val title = cursor.getString(1)
@@ -94,13 +97,17 @@ data class Music(var id: String, var title: String?, var artist: String?, var al
 //contentResolver & cursor
 private fun getMusicList(): MutableList<Music> {
     /*
+    ...
     데이터를 가져올 url, 필요한 데이터 세팅
+    ...
     */
-    val cursor = contentResolver.query(/*데이터를 가져올 url*, /*필요한 데이터*/, null, null, null)
+    val cursor = contentResolver.query(/*데이터를 가져올 url*/, /*필요한 데이터*/, null, null, null)
 
     while (cursor?.moveToNext() == true) {
-        /*가져온 데이터 초기화(id, title, artist, albumId, duration)
+        /*
+        가져온 데이터 초기화(id, title, artist, albumId, duration)
         val id = cursor.getString(0)
+        ...
         */
         val music = Music(id, title, artist, albumId, duration)
         musicList.add(music)
@@ -117,5 +124,8 @@ private fun getMusicList(): MutableList<Music> {
 
 ><a id = "ref">**참고링크**</a></br>
 
-Status bar 투명으로 설정/br>
+Status bar 투명으로 설정</br>
 https://jaeryo2357.tistory.com/92</br>
+
+MediaStore file 참고 링크</br>
+https://developer.android.com/training/data-storage/shared/media?hl=ko</br>

@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Thread_Timer</string>
+    <string name="init_time">init_time</string>
 </resources>

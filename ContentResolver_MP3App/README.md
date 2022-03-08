@@ -35,7 +35,7 @@ cf. 안드로이드 4대 메이저 컴포넌트 - 액티비티, 서비스, 콘�
 **콘텐트 리졸버**</br>
 -콘텐트 프로바이더로부터 데이터를 가져오는 도구</br>
 -query() 메서드 제공</br>
-`val cursor = contentResolver.query(listUrl, dataCol, null, null, null)`</br>
+`val cursor = contentResolver.query(uri, dataCol, null, null, null)`</br>
 
 <br></br>
 <br></br>
@@ -49,13 +49,13 @@ cf. 안드로이드 4대 메이저 컴포넌트 - 액티비티, 서비스, 콘�
 ```kotlin
 private fun getMusicList(): MutableList<Music> {
     val musicList = mutableListOf<Music>()
-    val url: Uri = MediaStore.Audio.Media.EXTERNAL_CONTENT_URI
+    val uri: Uri = MediaStore.Audio.Media.EXTERNAL_CONTENT_URI
     val musicInfoArray = arrayOf(
         MediaStore.Audio.Media._ID,
         MediaStore.Audio.Media.TITLE
         /*...추가로 필요한 데이터...*/
     )
-    val cursor = contentResolver.query(url, musicInfoArray, null, null, null)
+    val cursor = contentResolver.query(uri, musicInfoArray, null, null, null)
     while (cursor?.moveToNext() == true) {
         val id = cursor.getString(0)
         val title = cursor.getString(1)

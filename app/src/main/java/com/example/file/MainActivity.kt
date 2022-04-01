@@ -70,6 +70,7 @@ class MainActivity : AppCompatActivity() {
         binding.fileNameTextView.text = fileName
     }
 
+    //카메라앱(다른앱)에 파일 uri 를 intent 에 넣어 보냈기 때문에 결과적으로는 다른 앱에서 외부 메모리에 있는 앱별 저장소 파일에 접근한 것과 같음
     private fun openCamera(file: File) {
         val photoURI: Uri = FileProvider.getUriForFile(
             this,

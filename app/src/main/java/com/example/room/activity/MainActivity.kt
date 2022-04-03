@@ -1,29 +1,28 @@
 package com.example.room.activity
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.SearchView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.room.Room
 import com.example.room.adapter.MyRecyclerAdapter
 import com.example.room.databinding.ActivityMainBinding
-import com.example.room.room.MigrateDatabase
 import com.example.room.room.MyEntity
-import com.example.room.room.MyRoomHelper
+import com.example.room.room.MyDatabase
 
 class MainActivity : AppCompatActivity() {
     private val binding by lazy { ActivityMainBinding.inflate(layoutInflater) }
-    var roomHelper: MyRoomHelper? = null
+    var roomHelper: MyDatabase? = null
+    
+    companion object {
+        const val TAG = "testLog"
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-        initRecyclerView()
-    }
-
-    private fun initRecyclerView() {
-        roomHelper = Room.databaseBuilder(this, MyRoomHelper::class.java, "room_table")
-            .addMigrations(MigrateDatabase.MIGRATE_1_2)
+        roomHelper = Room.databaseBuilder(this, MyDatabase::class.java, "room_table")
             .allowMainThreadQueries()
             .build()
         val adapter = MyRecyclerAdapter()
@@ -32,23 +31,22 @@ class MainActivity : AppCompatActivity() {
         binding.recyclerMemo.adapter = adapter
         binding.recyclerMemo.layoutManager = LinearLayoutManager(this)
 
-        initSaveButton(adapter)
-    }
-
-    private fun initSaveButton(adapter: MyRecyclerAdapter) {
-        binding.buttonSave.setOnClickListener {
-            val editMemoTextView = binding.editMemo.text
-            if (editMemoTextView.isNotEmpty()) {
-                val content = editMemoTextView.toString()
-                val datetime = System.currentTimeMillis()
-                val memo = MyEntity(null , content, datetime)
-                roomHelper?.myDao()?.insert(memo)
-                adapter.memoList.clear()
-                adapter.memoList.addAll(roomHelper?.myDao()?.getAll()?: listOf())
-                adapter.notifyDataSetChanged()
-                binding.editMemo.setText("")
+        binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(searchResult: String?): Boolean {
+                if (searchResult != null) {
+                    val content = searchResult
+                    val datetime = System.currentTimeMillis()
+                    val memo = MyEntity(null , content, datetime)
+                    roomHelper?.myDao()?.insert(memo)
+                    adapter.memoList.clear()
+                    adapter.memoList.addAll(roomHelper?.myDao()?.getAll()?: listOf())
+                    adapter.notifyDataSetChanged()
+                }
+                return true
             }
-        }
+            override fun onQueryTextChange(newText: String?): Boolean {
+                return false
+            }
+        })
     }
 }
-

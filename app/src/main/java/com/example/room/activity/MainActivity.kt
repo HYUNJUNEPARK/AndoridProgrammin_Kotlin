@@ -34,9 +34,8 @@ class MainActivity : AppCompatActivity() {
         binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(searchResult: String?): Boolean {
                 if (searchResult != null) {
-                    val content = searchResult
                     val datetime = System.currentTimeMillis()
-                    val memo = MyEntity(null , content, datetime)
+                    val memo = MyEntity(null, searchResult, datetime)
                     roomHelper?.myDao()?.insert(memo)
                     adapter.memoList.clear()
                     adapter.memoList.addAll(roomHelper?.myDao()?.getAll()?: listOf())

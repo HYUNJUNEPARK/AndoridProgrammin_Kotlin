@@ -56,10 +56,10 @@ retrofitService.getUsers().enqueue(object : Callback<Repository> {
 -레트로핏 통신으로 가져온 JSON 데이터를 코틀린 데이터 클래스로 변환해 주는 컨터버</br>
 -레트로핏 객체 생성 시 `addConverterFactory()` 에 GsonConverterFactory 전달</br>
 ```
-        retrofit = Retrofit.Builder()
-            .baseUrl(BASE_URL)
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
+retrofit = Retrofit.Builder()
+    .baseUrl(BASE_URL)
+    .addConverterFactory(GsonConverterFactory.create())
+    .build()
 ```
 
 <br></br>

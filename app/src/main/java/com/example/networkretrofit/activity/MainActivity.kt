@@ -7,8 +7,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.networkretrofit.retrofit.RetrofitInterface
 import com.example.networkretrofit.adapter.CustomAdapter
 import com.example.networkretrofit.companion.Companion.Companion.BASE_URL
-import com.example.networkretrofit.model.Repository
 import com.example.networkretrofit.databinding.ActivityMainBinding
+import com.example.networkretrofit.model.Repository
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -51,13 +51,15 @@ class MainActivity : AppCompatActivity() {
                 retrofitService.getUsers().enqueue(object : Callback<Repository> {
                     override fun onResponse(call: Call<Repository>, response: Response<Repository>) {
                         adapter.userList = response.body() as Repository
-                        adapter.notifyDataSetChanged()
                         runOnUiThread {
+                            adapter.notifyDataSetChanged()
                             binding.progressBar.visibility = View.INVISIBLE
                         }
                     }
                     override fun onFailure(call: Call<Repository>, t: Throwable) {
-                        binding.progressBar.visibility = View.INVISIBLE
+                        runOnUiThread {
+                            binding.progressBar.visibility = View.INVISIBLE
+                        }
                     }
                 })
             }.start()

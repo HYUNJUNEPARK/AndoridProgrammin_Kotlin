@@ -35,6 +35,12 @@ class NetworkConnection(private val context: Context) : ConnectivityManager.Netw
         connectivityManager.registerNetworkCallback(networkRequest, this)
     }
 
+    private fun getConnectivityStatus(): Network? {//연결된 네트워크가 없을 시 null 리턴
+        val network: Network? = connectivityManager.activeNetwork ?: null
+        setNetworkType(network)
+        return network
+    }
+
     //콜백이 등록되거나 네트워크가 연결되었을 때 실행되는 메소드
     override fun onAvailable(network: Network) {
         super.onAvailable(network)
@@ -63,12 +69,6 @@ class NetworkConnection(private val context: Context) : ConnectivityManager.Netw
         connectivityManager.unregisterNetworkCallback(this)
     }
 //[END NetworkCallback]
-
-    private fun getConnectivityStatus(): Network? {
-        val network: Network? = connectivityManager.activeNetwork ?: null // 연결된 네트워크가 없을 시 null 리턴
-        setNetworkType(network)
-        return network
-    }
 
     private fun setNetworkType(network: Network?) {
         val networkCapabilities: NetworkCapabilities? = connectivityManager.getNetworkCapabilities(network) ?: null

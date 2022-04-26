@@ -130,7 +130,7 @@ CoroutineScope(Dispatchers.Default).async {
 
 
 ```kotlin
-//suspend 함수 코드가 실행 -> 코드1 동작 스레드가 잠시 멈춤 / 코드1의 상태값을 저장 -> suspend 함수 종류 -> 코드1의 상태값 복구
+//suspend 함수 코드가 실행 -> 코드1 동작 스레드가 잠시 멈춤 / 코드1의 상태값을 저장 -> suspend 함수 종료 -> 코드1의 상태값 복구
 //코드1의 실행은 잠시 멈추지만 스레드의 중단은 없음
 
 CoroutineScope().launch {

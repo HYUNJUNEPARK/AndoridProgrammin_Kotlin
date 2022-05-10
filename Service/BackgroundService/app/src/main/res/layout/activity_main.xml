@@ -21,6 +21,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
+        android:onClick="startStartedService"
         android:text="Start"
         app:layout_constraintEnd_toStartOf="@+id/stopButton"
         app:layout_constraintStart_toStartOf="parent"
@@ -30,6 +31,7 @@
         android:id="@+id/stopButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:onClick="stopStartedService"
         android:text="Stop"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/startButton"
@@ -37,19 +39,20 @@
 
     <TextView
         android:id="@+id/midTextView"
-        android:text="Bound Service"
         android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginTop="80dp"
-        app:layout_constraintTop_toBottomOf="@+id/startButton"
+        android:text="Bound Service"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        android:layout_height="wrap_content"/>
+        app:layout_constraintTop_toBottomOf="@+id/startButton" />
 
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/bindButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:onClick="startBindService"
         android:text="Bind"
         app:layout_constraintEnd_toStartOf="@+id/unbindButton"
         app:layout_constraintStart_toStartOf="parent"
@@ -59,6 +62,7 @@
         android:id="@+id/unbindButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:onClick="stopBindService"
         android:text="Unbind"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/bindButton"
@@ -69,6 +73,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
+        android:onClick="callServiceMessage"
         android:text="Call Service Message"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

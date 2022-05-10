@@ -12,6 +12,14 @@ class StartedService : Service() {
         val ACTION_STOP = "com.example.backgroundservice.STOP"
     }
 
+    override fun onCreate() {
+        super.onCreate()
+    }
+
+    override fun onBind(p0: Intent?): IBinder? {
+        TODO("Not yet implemented")
+    }
+
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
         val action = intent?.action
         Log.d("Service", "[StartedService : action] : $action")
@@ -21,9 +29,5 @@ class StartedService : Service() {
     override fun onDestroy() {
         Log.d("Service", "스타티드 서비스가 종료되었습니다.")
         super.onDestroy()
-    }
-
-    override fun onBind(p0: Intent?): IBinder? {
-        TODO("Not yet implemented")
     }
 }

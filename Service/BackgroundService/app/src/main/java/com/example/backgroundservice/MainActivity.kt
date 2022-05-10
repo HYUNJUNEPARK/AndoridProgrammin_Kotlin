@@ -17,6 +17,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
     }
 
+//startedService
     fun startStartedService(v: View) {
         val intent = Intent(this, StartedService::class.java)
         intent.action = StartedService.ACTION_START
@@ -28,6 +29,7 @@ class MainActivity : AppCompatActivity() {
         stopService(intent)
     }
 
+//bindService
     fun startBindService(v: View) {
         val intent = Intent(this, BoundService::class.java)
         bindService(intent, boundService.boundServiceConnection, Context.BIND_AUTO_CREATE)

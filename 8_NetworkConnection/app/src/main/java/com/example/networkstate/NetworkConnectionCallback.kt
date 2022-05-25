@@ -19,6 +19,11 @@ class NetworkConnectionCallback(private val context: Context) : ConnectivityMana
     //NetworkCallback 등록
     fun register() {
         connectivityManager.registerNetworkCallback(networkRequest, this)
+
+        //앱 실행하자마자 네트워크 연결상태를 알고 싶을 때 사용
+//        if (networkConnectionState() == null) {
+//            MyDialog(context).unConnectionDialog.show()
+//        }
     }
 
     //NetworkCallback 해제

@@ -5,7 +5,6 @@
 ---
 1. <a href = "#content1">퍼미션 설정과 사용 설정</a></br>
 2. <a href = "#content2">퍼미션 함수</a></br>
-3. <a href = "#content3">content3</a></br>
 * <a href = "#ref">참고링크</a>
 ---
 ><a id = "content1">**1. 퍼미션 설정과 사용 설정**</a></br>

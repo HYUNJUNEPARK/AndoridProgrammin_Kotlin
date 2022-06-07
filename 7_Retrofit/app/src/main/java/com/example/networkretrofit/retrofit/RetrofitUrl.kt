@@ -1,9 +1,8 @@
-package com.example.networkretrofit.companion
+package com.example.networkretrofit.retrofit
 
-class Companion {
+class RetrofitUrl {
     companion object {
         const val BASE_URL = "https://api.github.com/"
         const val DETAIL_URL = "users/Kotlin/repos"
-        const val TAG = "testLog"
     }
 }

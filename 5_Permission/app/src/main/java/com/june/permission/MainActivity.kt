@@ -21,8 +21,7 @@ class MainActivity : AppCompatActivity() {
         binding.requestAuthCountTextView.text = permissions.size.toString()
 
         //result : true(0) 모든 권한 승인 / false(-1) 권한 중 하나라도 거절
-        if (grantResults.all { result -> result == PackageManager.PERMISSION_GRANTED}) //권한을 모두 승인 받았을 때
-        {
+        if (grantResults.all { result -> result == PackageManager.PERMISSION_GRANTED}) { //권한을 모두 승인 받았을 때
             Permission(this).permissionGranted()
         }
         else { //권한 승인이 하나라도 거절되었을 때 -> AlertDialog

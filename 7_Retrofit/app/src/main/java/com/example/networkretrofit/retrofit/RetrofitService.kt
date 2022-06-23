@@ -6,7 +6,7 @@ import com.example.networkretrofit.model.Repository
 import retrofit2.Call
 import retrofit2.http.GET
 
-interface RetrofitInterface {
+interface RetrofitService {
     @GET(DETAIL_URL)
     fun gitUsers(): Call<Repository>
 }

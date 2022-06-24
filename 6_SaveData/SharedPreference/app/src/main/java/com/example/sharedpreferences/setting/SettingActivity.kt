@@ -1,9 +1,10 @@
-package com.example.sharedpreferences
+package com.example.sharedpreferences.setting
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
+import com.example.sharedpreferences.R
 import com.example.sharedpreferences.databinding.ActivitySettingBinding
 
 class SettingActivity : AppCompatActivity() {

@@ -1,23 +1,19 @@
 package com.example.sharedpreferences
 
 import android.content.Intent
-import android.content.SharedPreferences
 import android.graphics.Color
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import androidx.preference.PreferenceManager
 import com.example.sharedpreferences.databinding.ActivityMainBinding
+import com.example.sharedpreferences.setting.SettingActivity
+import com.example.sharedpreferences.sharedpreference.SettingPreference
 
 class MainActivity : AppCompatActivity() {
     private val binding by lazy { ActivityMainBinding.inflate(layoutInflater) }
-    private lateinit var shared: SharedPreferences
-
-    companion object {
-        const val TAG = "testLog"
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,11 +21,13 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(binding.toolbar)
         supportActionBar?.setDisplayShowTitleEnabled(false)
 
-        shared = PreferenceManager.getDefaultSharedPreferences(this)
+        initViews()
+    }
 
-        getId()
-        getColor()
-        getSwitchValue()
+    override fun onResume() {
+        super.onResume()
+
+        initViews()
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -48,23 +46,23 @@ class MainActivity : AppCompatActivity() {
         return super.onOptionsItemSelected(item)
     }
 
-    private fun getId() {
-        val sharedId = shared.getString("id", "Null")
-        binding.idTextView.text = sharedId
+    private fun initViews() {
+        SettingPreference(this).apply {
+            binding.idTextView.text = preferenceId()
+            binding.colorBoxView.setBackgroundColor(Color.parseColor(preferenceColor()))
+            if (preferenceSwitchValue()) {
+                binding.alarmTextView.text = "ON"
+                binding.alarmTextView.setTextColor(getColor(R.color.red))
+            }
+            else {
+                binding.alarmTextView.text = "OFF"
+                binding.alarmTextView.setTextColor(getColor(R.color.black))
+            }
+        }
     }
 
-    private fun getColor() {
-        val sharedColor = shared.getString("color", "#FF000000")
-        binding.colorBoxView.setBackgroundColor(Color.parseColor(sharedColor))
-    }
-    private fun getSwitchValue() {
-        val switchValue = shared.getBoolean("noti_message", false)
-        if (switchValue) {
-            binding.alarmTextView.text = "ON"
-            binding.alarmTextView.setTextColor(getColor(R.color.red))
-        }
-        else {
-            binding.alarmTextView.text = "OFF"
-        }
+    fun initializeButtonClicked(v: View) {
+        SettingPreference(this).initializePref()
+        initViews()
     }
 }

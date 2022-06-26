@@ -7,6 +7,7 @@
 1. <a href = "#content1">SharedPreferences</a></br>
 2. <a href = "#content2">SharedPreferences 객체를 얻는 방법</a></br>
 3. <a href = "#content3">데이터 저장/로드</a></br>
+4. <a href = "#content4">commit, apply 차이</a></br>
 * <a href = "#ref">참고링크</a>
 ---
 ><a id = "content1">**1. SharedPreferences**</a></br>
@@ -17,8 +18,16 @@
 -간단한 데이터를 저장하는 데 유용하며 내장 메모리의 앱 폴더에 XML 파일로 저장됨</br>
 -AndroidX 의 Preference 를 이용하면 앱의 설정 기능을 쉽게 구현할 수 있음</br>
 -[res] 우클릭-[New]-[Android Resource File]-> Resource type : XML / Root element : PreferenceScreen / File name : preferences</br>
-
 `implementation 'androidx.preference:preference-ktx:1.1.1'`
+
+**SharedPreferences 의 일반적인 사용 사례**</br>
+-사용자 애플리케이션의 첫 방문 체크 (또는 애플리케이션 실행 횟수 카운트)</br>
+첫 번째 방문시 지시 사항이나 튜토리얼 또는 스플래시 스크린 액티비티를 보여줄 수 있다</br>
+-애플리케이션의 마지막 업데이트 시점 확인</br>
+마지막 업데이트 시간을 저장하여 업데이트나 데이터 동기화가 필요한지를 판단할 수 있다</br>
+-사용자의 로그인 사용자 이름 저장</br>
+-애플리케이션의 상태 저장</br>
+-사용자 위치 캐시</br>
 
 앱 설정 UI 샘플 preferences.xml 에서 사용하는 입력필드 종류</br>
 a. CheckBoxPreference : 체크박스 타입 입력 필드</br>
@@ -81,6 +90,26 @@ val data2 = sharedPref.getInt("data2", 0)
 
 <br></br>
 <br></br>
+
+><a id = "content4">**4. commit, apply 차이**</a></br>
+
+-위 메소드들을 이용하여 메모리상 값에 대한 쓰기 작업을 하고 commit 이나 apply 를 호출해야 실제 파일 쓰기 작업을 함</br>
+
+**apply**</br>
+-API9 에서 추가된 메소드로 호출 후 바로 리턴되어 스레드를 블록시키지 않음</br>
+**commit**</br>
+-호출 시 스레드는 block 되고 커널에 파일 저장 완료 후 함수는 리턴되고 스레드는 다시 작동하며 처리결과를 true/false 로 반환함</br>
+
+->**commit : 동기처리**</br>
+->**apply : 비동기처리**</br>
+**결과 값이 필요 없다면 apply 를 사용하는 게 반응성면에서 좋음!**</br>
+
+
+<br></br>
+<br></br>
 ---
 
 ><a id = "ref">**참고링크**</a></br>
+
+안드로이드 - sharedPreference 란? commit, apply 차이</br>
+https://m.blog.naver.com/wonjinho81/220389672520</br>

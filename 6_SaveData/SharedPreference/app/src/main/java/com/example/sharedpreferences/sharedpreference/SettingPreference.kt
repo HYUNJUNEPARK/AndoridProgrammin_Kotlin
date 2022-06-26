@@ -21,7 +21,7 @@ class SettingPreference(context: Context) {
             putString(PREFERENCE_NAME_ID, PREFERENCE_ID_DEFAULT)
             putString(PREFERENCE_NAME_COLOR, PREFERENCE_COLOR_DEFAULT)
             putBoolean(PREFERENCE_NAME_SWITCH, PREFERENCE_SWITCH_DEFAULT)
-            commit()
+            apply()
         }
     }
 }

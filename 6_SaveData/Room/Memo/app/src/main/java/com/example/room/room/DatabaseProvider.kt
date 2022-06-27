@@ -11,6 +11,5 @@ object DatabaseProvider {
         DB_NAME
     )
     .addMigrations(MigrateDatabase.MIGRATE_1_2)
-    .allowMainThreadQueries()
     .build()
 }

@@ -8,7 +8,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.room.databinding.ItemRecyclerBinding
 import com.example.room.room.MyDao
 import com.example.room.room.MyEntity
-import com.example.room.room.MyRoomHelper
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 
 class MyRecyclerAdapter: RecyclerView.Adapter<MyRecyclerAdapter.MyHolder>() {
@@ -25,7 +27,9 @@ class MyRecyclerAdapter: RecyclerView.Adapter<MyRecyclerAdapter.MyHolder>() {
 
         init {
             binding.buttonDelete.setOnClickListener {
-                myDao?.delete(memo)
+                CoroutineScope(Dispatchers.IO).launch {
+                    myDao?.delete(memo)
+                }
                 memoList.remove(memo)
                 notifyDataSetChanged()
             }
@@ -39,12 +43,21 @@ class MyRecyclerAdapter: RecyclerView.Adapter<MyRecyclerAdapter.MyHolder>() {
                     binding.textEditor.visibility = View.INVISIBLE
                     binding.buttonUpdate.text = "수정"
                     binding.buttonUpdate.setTextColor(Color.WHITE)
+
                     val content = binding.textEditor.text.toString()
                     val datetime = System.currentTimeMillis()
                     val memo = MyEntity(memo.no, content, datetime)
-                    myDao?.update(memo)
+
+                    CoroutineScope(Dispatchers.IO).launch {
+                        myDao?.update(memo)
+                    }
+
                     memoList.clear()
-                    memoList.addAll(myDao?.getAll()?: listOf())
+
+                    CoroutineScope(Dispatchers.IO).launch {
+                        memoList.addAll(myDao?.getAll()?: listOf())
+                    }
+
                     notifyDataSetChanged()
                 }
             }

@@ -7,6 +7,9 @@ import com.example.room.adapter.MyRecyclerAdapter
 import com.example.room.databinding.ActivityMainBinding
 import com.example.room.room.DatabaseProvider
 import com.example.room.room.MyEntity
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
     private val binding by lazy { ActivityMainBinding.inflate(layoutInflater) }
@@ -16,8 +19,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-
-
         initRecyclerView()
     }
 
@@ -25,8 +26,9 @@ class MainActivity : AppCompatActivity() {
         val adapter = MyRecyclerAdapter()
         adapter.myDao = myDao
 
-        //TODO
-        adapter.memoList.addAll(myDao.getAll())
+        CoroutineScope(Dispatchers.IO).launch {
+            adapter.memoList.addAll(myDao.getAll())
+        }
 
         binding.recyclerMemo.adapter = adapter
         binding.recyclerMemo.layoutManager = LinearLayoutManager(this)
@@ -42,10 +44,16 @@ class MainActivity : AppCompatActivity() {
                 val memo = MyEntity(null, content, datetime)
 
                 //TODO
-                myDao.insert(memo)
+                CoroutineScope(Dispatchers.IO).launch {
+                    myDao.insert(memo)
+                }
 
                 adapter.memoList.clear()
-                adapter.memoList.addAll(myDao.getAll())
+
+                CoroutineScope(Dispatchers.IO).launch {
+                    adapter.memoList.addAll(myDao.getAll())
+                }
+
                 adapter.notifyDataSetChanged()
                 binding.editMemo.setText("")
             }

@@ -38,11 +38,11 @@
         android:hint="메모를 입력하세요"
         android:inputType="textMultiLine"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/buttonSave"
+        app:layout_constraintEnd_toStartOf="@+id/updateButton"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/buttonSave"
+        android:id="@+id/updateButton"
         android:layout_width="wrap_content"
         android:layout_height="100dp"
         android:layout_marginEnd="8dp"

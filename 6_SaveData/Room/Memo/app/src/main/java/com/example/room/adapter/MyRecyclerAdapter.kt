@@ -6,13 +6,14 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.room.databinding.ItemRecyclerBinding
+import com.example.room.room.MyDao
 import com.example.room.room.MyEntity
 import com.example.room.room.MyRoomHelper
 import java.text.SimpleDateFormat
 
 class MyRecyclerAdapter: RecyclerView.Adapter<MyRecyclerAdapter.MyHolder>() {
     var memoList = mutableListOf<MyEntity>()
-    var roomHelper: MyRoomHelper?= null //initialized MainActivity onCreate
+    var myDao: MyDao ?= null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyHolder {
         val binding = ItemRecyclerBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -24,7 +25,7 @@ class MyRecyclerAdapter: RecyclerView.Adapter<MyRecyclerAdapter.MyHolder>() {
 
         init {
             binding.buttonDelete.setOnClickListener {
-                roomHelper?.myDao()?.delete(memo)
+                myDao?.delete(memo)
                 memoList.remove(memo)
                 notifyDataSetChanged()
             }
@@ -41,9 +42,9 @@ class MyRecyclerAdapter: RecyclerView.Adapter<MyRecyclerAdapter.MyHolder>() {
                     val content = binding.textEditor.text.toString()
                     val datetime = System.currentTimeMillis()
                     val memo = MyEntity(memo.no, content, datetime)
-                    roomHelper?.myDao()?.update(memo)
+                    myDao?.update(memo)
                     memoList.clear()
-                    memoList.addAll(roomHelper?.myDao()?.getAll()?: listOf())
+                    memoList.addAll(myDao?.getAll()?: listOf())
                     notifyDataSetChanged()
                 }
             }

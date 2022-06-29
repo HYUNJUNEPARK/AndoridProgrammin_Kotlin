@@ -17,13 +17,9 @@ class SettingActivity : AppCompatActivity() {
         supportActionBar?.setDisplayShowTitleEnabled(false)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        initFragment()
-    }
-    private fun initFragment() {
-        val fragmentManager: FragmentManager = supportFragmentManager
-        val transaction: FragmentTransaction = fragmentManager.beginTransaction()
-        val fragment = SettingFragment()
-        transaction.add(R.id.fragmentContents, fragment)
-        transaction.commit()
+        supportFragmentManager.beginTransaction().apply {
+            add(R.id.fragmentContents, SettingFragment())
+            commit()
+        }
     }
 }

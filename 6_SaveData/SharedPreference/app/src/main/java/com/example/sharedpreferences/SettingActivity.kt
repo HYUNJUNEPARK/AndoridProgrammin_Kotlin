@@ -1,10 +1,7 @@
-package com.example.sharedpreferences.setting
+package com.example.sharedpreferences
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.FragmentTransaction
-import com.example.sharedpreferences.R
 import com.example.sharedpreferences.databinding.ActivitySettingBinding
 
 class SettingActivity : AppCompatActivity() {
@@ -14,9 +11,9 @@ class SettingActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
         setSupportActionBar(binding.toolbar)
+
         supportActionBar?.setDisplayShowTitleEnabled(false)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-
         supportFragmentManager.beginTransaction().apply {
             add(R.id.fragmentContents, SettingFragment())
             commit()

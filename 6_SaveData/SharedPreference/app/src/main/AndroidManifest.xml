@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SharedPreferences">
         <activity
-            android:name=".setting.SettingActivity"
+            android:name=".SettingActivity"
             android:parentActivityName=".MainActivity"
             android:exported="true" />
         <activity

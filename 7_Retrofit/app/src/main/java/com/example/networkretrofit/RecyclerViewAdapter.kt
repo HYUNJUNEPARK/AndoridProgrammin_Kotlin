@@ -1,15 +1,14 @@
-package com.example.networkretrofit.adapter
+package com.example.networkretrofit
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.networkretrofit.R
 import com.example.networkretrofit.databinding.ItemRecyclerBinding
 import com.example.networkretrofit.model.Repository
 import com.example.networkretrofit.model.RepositoryItem
 
-class CustomAdapter : RecyclerView.Adapter<CustomAdapter.Holder>() {
+class RecyclerViewAdapter : RecyclerView.Adapter<RecyclerViewAdapter.Holder>() {
     var userList: Repository? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder {
